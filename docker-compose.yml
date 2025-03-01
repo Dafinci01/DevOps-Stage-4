@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  auth-api:
+    build: ./auth-api
+    ports:
+      - "8000:8000"
+    networks:
+      - appnet
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    networks:
+      - appnet
+
+  log-message-processor:
+    build: ./log-message-processor
+    networks:
+      - appnet
+
+  todos-api:
+    build: ./todos-api
+    ports:
+      - "3000:3000"
+    networks:
+      - appnet
+
+  users-api:
+    build: ./users-api
+    ports:
+      - "8080:8080"
+    networks:
+      - appnet
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - appnet
+
+networks:
+  appnet:
+    driver: bridge
+
